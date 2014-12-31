@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
+using cleancoderscom;
 
 namespace cleancoderscom.fixtures
 {
-
-	using cleancoderscom;
-
 
 	public class CodecastPresentation
 	{
