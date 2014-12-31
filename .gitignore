@@ -38,4 +38,5 @@ FitNesseRoot/FitNesse/**
 FitNesseRoot/files/**
 FitNesseRoot/updateDoNotCopyOverList
 FitNesseRoot/updateList
-
+FitNesseRoot/RecentChanges
+FitNesseRoot/**/*.zip
