@@ -9,11 +9,13 @@ namespace cleancoderscom
 
 	  private IList<Codecast> codecasts;
 	  private IList<User> users;
+	  private List<License> licenses;
 
 	  public MockGateway()
 	  {
 		codecasts = new List<Codecast>();
 		users = new List<User>();
+		licenses = new List<License>();
 	  }
 
 	  public virtual IList<Codecast> findAllCodecasts()
@@ -26,14 +28,30 @@ namespace cleancoderscom
 		codecasts.Remove(codecast);
 	  }
 
-	  public virtual void save(Codecast codecast)
+	  public virtual Codecast save(Codecast codecast)
 	  {
-		codecasts.Add(codecast);
+		codecasts.Add((Codecast)establishId(codecast));
+		return codecast;
 	  }
 
-	  public virtual void save(User user)
+	  public virtual User save(User user)
 	  {
-		users.Add(user);
+		users.Add((User)establishId(user));
+		return user;
+	  }
+
+	  private Entity establishId(Entity entity)
+	  {
+		if (entity.Id == null)
+		{
+		  entity.Id =System.Guid.NewGuid().ToString();
+		}
+		return entity;
+	  }
+
+	  public virtual void save(License license)
+	  {
+		licenses.Add(license);
 	  }
 
 	  public virtual User findUser(string username)
@@ -46,6 +64,31 @@ namespace cleancoderscom
 		  }
 		}
 		return null;
+	  }
+
+	  public virtual Codecast findCodecastByTitle(string codecastTitle)
+	  {
+		foreach (Codecast codecast in codecasts)
+		{
+		  if (codecast.Title.Equals(codecastTitle))
+		  {
+			return codecast;
+		  }
+		}
+		return null;
+	  }
+
+	  public virtual IList<License> findLicensesForUserAndCodecast(User user, Codecast codecast)
+	  {
+		IList<License> results = new List<License>();
+		foreach (License license in licenses)
+		{
+		  if (license.User.isSame(user) && license.Codecast.isSame(codecast))
+		  {
+			results.Add(license);
+		  }
+		}
+		return results;
 	  }
 	}
 

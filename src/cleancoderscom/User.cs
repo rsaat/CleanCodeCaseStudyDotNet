@@ -1,7 +1,7 @@
 ﻿namespace cleancoderscom
 {
 
-	public class User
+	public class User : Entity
 	{
 	  private string userName;
 

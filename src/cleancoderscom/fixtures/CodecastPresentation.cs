@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
-using cleancoderscom;
 
 namespace cleancoderscom.fixtures
 {
 
+	using cleancoderscom;
 	public class CodecastPresentation
 	{
 	  private PresentCodecastUseCase useCase = new PresentCodecastUseCase();
-	  private GateKeeper gateKeeper = new GateKeeper();
+	  public static GateKeeper gateKeeper = new GateKeeper();
 
 	  public CodecastPresentation()
 	  {
-		Context.gateway = new MockGateway();
+       
+          Context.gateway = new MockGateway();
+	      
 	  }
 
 	  public virtual bool addUser(string username)
@@ -34,7 +36,15 @@ namespace cleancoderscom.fixtures
 		}
 	  }
 
-	  public virtual bool createLicenseForViewing(string user, string codecast)
+	  public virtual bool createLicenseForViewing(string username, string codecastTitle)
+	  {
+		User user = Context.gateway.findUser(username);
+		Codecast codecast = Context.gateway.findCodecastByTitle(codecastTitle);
+		License license = new License(user, codecast);
+		Context.gateway.save(license);
+		return useCase.isLicensedToViewCodecast(user, codecast);
+	  }
+	  public virtual bool createLicenseForDownloading(string user, string codecast)
 	  {
 		return false;
 	  }

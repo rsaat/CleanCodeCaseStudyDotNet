@@ -1,7 +1,7 @@
 ﻿namespace cleancoderscom
 {
 
-	public class Codecast
+	public class Codecast : Entity
 	{
 	  private string title;
 	  private string publicationDate;
@@ -12,6 +12,10 @@
 		  {
 			this.title = value;
 		  }
+		  get
+		  {
+			return title;
+		  }
 	  }
 
 	  public virtual string PublicationDate
@@ -20,7 +24,13 @@
 		  {
 			this.publicationDate = value;
 		  }
+		  get
+		  {
+			return publicationDate;
+		  }
 	  }
+
+
 	}
 
 }

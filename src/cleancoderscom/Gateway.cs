@@ -9,11 +9,17 @@ namespace cleancoderscom
 
 	  void delete(Codecast codecast);
 
-	  void save(Codecast codecast);
+	  Codecast save(Codecast codecast);
 
-	  void save(User user);
+	  User save(User user);
+
+	  void save(License license);
 
 	  User findUser(string username);
+
+	  Codecast findCodecastByTitle(string codecastTitle);
+
+	  IList<License> findLicensesForUserAndCodecast(User user, Codecast codecast);
 	}
 
 }
