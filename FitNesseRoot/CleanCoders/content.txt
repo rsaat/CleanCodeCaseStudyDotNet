@@ -5,4 +5,4 @@
 !define COMMAND_PATTERN {%m -r fitSharp.Slim.Service.Runner,Fitsharp\fitSharp.dll %p}
 !define TEST_RUNNER {Fitsharp\Runner.exe}
 
-!path T:\examples\CleanCodeCaseStudyDotNet\src\cleancoderscom\bin\Debug\cleancoderscom.dll
+!path src\cleancoderscom\bin\Debug\cleancoderscom.dll
