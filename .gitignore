@@ -33,6 +33,7 @@ _ReSharper*/
 build/
 #"libs/**" matches all files inside directory "libs", relative to the location of the .gitignore file, with infinite depth.
 !Fitsharp/**
+!NUnit-2.6.3/**
 FitNesseRoot/ErrorLogs/**
 FitNesseRoot/FitNesse/**
 FitNesseRoot/files/**
