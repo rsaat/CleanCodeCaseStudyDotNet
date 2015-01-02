@@ -1,4 +1,6 @@
-﻿namespace cleancoderscom.fixtures
+﻿using System;
+using System.Globalization;
+namespace cleancoderscom.fixtures
 {
 
 
@@ -6,7 +8,7 @@
 	{
 	  private string title;
 	  private string publicationDate;
-
+	  
 	  public virtual string Title
 	  {
 		  set
@@ -27,8 +29,16 @@
 	  {
 		Codecast codecast = new Codecast();
 		codecast.Title = title;
-		codecast.PublicationDate = publicationDate;
+		Console.WriteLine(publicationDate);
+        Console.WriteLine(parseDate(publicationDate));
+        codecast.PublicationDate = parseDate(publicationDate);
 		Context.gateway.save(codecast);
+	  }
+
+	  DateTime parseDate(string dateToParse)
+	  {
+            var  cultureUS = new CultureInfo("en-US");
+	        return DateTime.Parse(dateToParse, cultureUS);
 	  }
 
 	}

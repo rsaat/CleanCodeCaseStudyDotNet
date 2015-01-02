@@ -1,10 +1,11 @@
-﻿namespace cleancoderscom
+﻿using System;
+namespace cleancoderscom
 {
 
 	public class Codecast : Entity
 	{
 	  private string title;
-	  private string publicationDate;
+	  private DateTime publicationDate = DateTime.Now;
 
 	  public virtual string Title
 	  {
@@ -18,7 +19,7 @@
 		  }
 	  }
 
-	  public virtual string PublicationDate
+	  public virtual DateTime PublicationDate
 	  {
 		  set
 		  {

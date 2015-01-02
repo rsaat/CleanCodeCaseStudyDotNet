@@ -21,15 +21,15 @@ namespace cleancoderscom.fixtures
 		IList<object> queryResponse = new List<object>();
 		foreach (PresentableCodecast pcc in presentableCodecasts)
 		{
-		  queryResponse.Add(makeRow(pcc.title, pcc.title, pcc.title, pcc.isViewable, false));
+		  queryResponse.Add(makeRow(pcc));
 		}
 		return queryResponse;
 
 	  }
 
-	  private IList<object> makeRow(string title, string picture, string description, bool viewable, bool downloadable)
+	  private IList<object> makeRow(PresentableCodecast pc)
 	  {
-		return list(new object[]{list("title", title), list("picture", picture), list("description", description), list("viewable", viewable ? "+" : "-"), list("downloadable", downloadable ? "+" : "-")});
+		return list(new object[]{list("title", pc.title), list("publication date", pc.publicationDate), list("picture", pc.title), list("description", pc.title), list("viewable", pc.isViewable ? "+" : "-"), list("downloadable", pc.isDownloadable ? "+" : "-")});
 	  }
 
 	}

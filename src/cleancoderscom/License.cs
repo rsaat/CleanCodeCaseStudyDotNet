@@ -1,33 +1,47 @@
-﻿namespace cleancoderscom
+﻿using System.Collections.Generic;
+namespace cleancoderscom
 {
 
-	public class License : Entity
-	{
-	  private User user;
-	  private Codecast codecast;
+    public class License : Entity
+    {
+        public enum LicenseType
+        {
+            DOWNLOADING,
+            VIEWING
+        };
 
-	  public License(User user, Codecast codecast)
-	  {
+        private LicenseType type;
+        private User user;
+        private Codecast codecast;
+        public License(LicenseType type, User user, Codecast codecast)
+        {
+            this.type = type;
+            this.user = user;
+            this.codecast = codecast;
+        }
 
-		this.user = user;
-		this.codecast = codecast;
-	  }
+        public virtual LicenseType Type
+        {
+            get
+            {
+                return type;
+            }
+        }
 
-	  public virtual User User
-	  {
-		  get
-		  {
-			return user;
-		  }
-	  }
+        public virtual User User
+        {
+            get
+            {
+                return user;
+            }
+        }
 
-	  public virtual Codecast Codecast
-	  {
-		  get
-		  {
-			return codecast;
-		  }
-	  }
-	}
-
+        public virtual Codecast Codecast
+        {
+            get
+            {
+                return codecast;
+            }
+        }
+    }
 }

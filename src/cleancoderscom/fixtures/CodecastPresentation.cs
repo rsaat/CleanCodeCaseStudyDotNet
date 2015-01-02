@@ -4,6 +4,8 @@ namespace cleancoderscom.fixtures
 {
 
 	using cleancoderscom;
+    using LT=License.LicenseType;
+
 	public class CodecastPresentation
 	{
 	  private PresentCodecastUseCase useCase = new PresentCodecastUseCase();
@@ -40,13 +42,17 @@ namespace cleancoderscom.fixtures
 	  {
 		User user = Context.gateway.findUser(username);
 		Codecast codecast = Context.gateway.findCodecastByTitle(codecastTitle);
-		License license = new License(user, codecast);
+        License license = new License(LT.VIEWING, user, codecast);
 		Context.gateway.save(license);
-		return useCase.isLicensedToViewCodecast(user, codecast);
+        return useCase.isLicensedFor(LT.VIEWING, user, codecast);
 	  }
-	  public virtual bool createLicenseForDownloading(string user, string codecast)
+	  public virtual bool createLicenseForDownloading(string username, string codecastTitle)
 	  {
-		return false;
+		User user = Context.gateway.findUser(username);
+		Codecast codecast = Context.gateway.findCodecastByTitle(codecastTitle);
+		License license = new License(LT.DOWNLOADING, user, codecast);
+		Context.gateway.save(license);
+		return useCase.isLicensedFor(LT.DOWNLOADING, user, codecast);
 	  }
 
 	  public virtual string presentationUser()
@@ -56,12 +62,12 @@ namespace cleancoderscom.fixtures
 
 	  public virtual bool clearCodecasts()
 	  {
-		IList<Codecast> codecasts = Context.gateway.findAllCodecasts();
+		IList<Codecast> codecasts = Context.gateway.findAllCodecastsSortedChronologically();
 		foreach (Codecast codecast in new List<Codecast>(codecasts))
 		{
 		  Context.gateway.delete(codecast);
 		}
-		return Context.gateway.findAllCodecasts().Count == 0;
+		return Context.gateway.findAllCodecastsSortedChronologically().Count == 0;
 	  }
 
 	  public virtual int countOfCodecastsPresented()

@@ -5,7 +5,7 @@ namespace cleancoderscom
 
 	public interface Gateway
 	{
-	  IList<Codecast> findAllCodecasts();
+	  IList<Codecast> findAllCodecastsSortedChronologically();
 
 	  void delete(Codecast codecast);
 

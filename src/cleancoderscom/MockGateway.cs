@@ -18,9 +18,23 @@ namespace cleancoderscom
 		licenses = new List<License>();
 	  }
 
-	  public virtual IList<Codecast> findAllCodecasts()
+	  public virtual IList<Codecast> findAllCodecastsSortedChronologically()
 	  {
-		return codecasts;
+		List<Codecast> sortedCodecasts = new List<Codecast>(codecasts);
+		sortedCodecasts.Sort(new ComparatorAnonymousInnerClassHelper(this));
+		return sortedCodecasts;
+	  }
+	  private class ComparatorAnonymousInnerClassHelper : IComparer<Codecast>
+	  {
+		  private readonly MockGateway outerInstance;
+		  public ComparatorAnonymousInnerClassHelper(MockGateway outerInstance)
+		  {
+			  this.outerInstance = outerInstance;
+		  }
+		  public virtual int Compare(Codecast o1, Codecast o2)
+		  {
+			return o1.PublicationDate.CompareTo(o2.PublicationDate);
+		  }
 	  }
 
 	  public virtual void delete(Codecast codecast)
