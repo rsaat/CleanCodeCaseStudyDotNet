@@ -3,7 +3,7 @@
 namespace cleancoderscom
 {
 
-	public interface Gateway
+	public interface CodecastGateway
 	{
 	  IList<Codecast> findAllCodecastsSortedChronologically();
 
@@ -11,15 +11,7 @@ namespace cleancoderscom
 
 	  Codecast save(Codecast codecast);
 
-	  User save(User user);
-
-	  void save(License license);
-
-	  User findUser(string username);
-
 	  Codecast findCodecastByTitle(string codecastTitle);
-
-	  IList<License> findLicensesForUserAndCodecast(User user, Codecast codecast);
 	}
 
 }

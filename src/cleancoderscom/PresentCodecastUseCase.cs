@@ -12,7 +12,7 @@ namespace cleancoderscom
 	  public virtual IList<PresentableCodecast> presentCodecasts(User loggedInUser)
 	  {
 		List<PresentableCodecast> presentableCodecasts = new List<PresentableCodecast>();
-		IList<Codecast> allCodecasts = Context.gateway.findAllCodecastsSortedChronologically();
+		IList<Codecast> allCodecasts = Context.codecastGateway.findAllCodecastsSortedChronologically();
 		foreach (Codecast codecast in allCodecasts)
 		{
 		  presentableCodecasts.Add(formatCodecast(loggedInUser, codecast));
@@ -32,7 +32,7 @@ namespace cleancoderscom
 
 	  public virtual bool isLicensedFor(License.LicenseType licenseType, User user, Codecast codecast)
 	  {
-		IList<License> licenses = Context.gateway.findLicensesForUserAndCodecast(user, codecast);
+		IList<License> licenses = Context.licenseGateway.findLicensesForUserAndCodecast(user, codecast);
 		foreach (License l in licenses)
 		{
 		  if (l.Type == licenseType)

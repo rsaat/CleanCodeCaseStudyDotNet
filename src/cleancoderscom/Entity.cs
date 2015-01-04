@@ -1,7 +1,9 @@
-﻿namespace cleancoderscom
+﻿using System;
+
+namespace cleancoderscom
 {
 
-	public class Entity
+	public class Entity : ICloneable
 	{
 	  private string id;
 
@@ -22,6 +24,10 @@
 		  }
 	  }
 
+	  public virtual object Clone()
+	  {
+		return base.MemberwiseClone();
+	  }
 	}
 
 }
