@@ -43,21 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Codecast.cs" />
+    <Compile Include="CodecastGateway.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityTest.cs" />
-    <Compile Include="fixtures\CodecastPresentation.cs" />
-    <Compile Include="fixtures\GivenCodecasts.cs" />
-    <Compile Include="fixtures\OfCodeCasts.cs" />
     <Compile Include="GateKeeper.cs" />
-    <Compile Include="Gateway.cs" />
     <Compile Include="License.cs" />
-    <Compile Include="MockGateway.cs" />
+    <Compile Include="LicenseGateway.cs" />
     <Compile Include="PresentableCodecast.cs" />
     <Compile Include="PresentCodecastUseCase.cs" />
-    <Compile Include="PresentCodecastUseCaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="socketserver\SocketServer.cs" />
+    <Compile Include="socketserver\SocketService.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserGateway.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
