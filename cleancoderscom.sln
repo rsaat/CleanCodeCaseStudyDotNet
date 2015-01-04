@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cleancoderscom", "cleancoderscom.csproj", "{ED2D0E54-8DD7-4BE2-8360-A1C89372B18A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cleancoderscom", "src\cleancoderscom\cleancoderscom.csproj", "{ED2D0E54-8DD7-4BE2-8360-A1C89372B18A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cleancoderscomTest", "test\cleancoderscom\tests\cleancoderscomTest.csproj", "{8B64F031-0598-4D43-B3B0-2FC8FA0E0616}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{ED2D0E54-8DD7-4BE2-8360-A1C89372B18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED2D0E54-8DD7-4BE2-8360-A1C89372B18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED2D0E54-8DD7-4BE2-8360-A1C89372B18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B64F031-0598-4D43-B3B0-2FC8FA0E0616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B64F031-0598-4D43-B3B0-2FC8FA0E0616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B64F031-0598-4D43-B3B0-2FC8FA0E0616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B64F031-0598-4D43-B3B0-2FC8FA0E0616}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
