@@ -10,7 +10,9 @@ namespace cleancoderscom.tests.presentation
     /// <summary>
     ///   PresentCodecastUseCaseTest parent tests.
     ///   TODO:Remove nested classes tests or find a better implementation with C#. 
-    ///   This code requires that outer class tests before nested class tests.  
+    ///   This code requires that outer class tests run before nested class tests.  
+    ///   See C# nested classes are like C++ nested classes, not Java inner classes
+    ///   http://blogs.msdn.com/b/oldnewthing/archive/2006/08/01/685248.aspx
     /// </summary>
     public class PresentCodecastUseCaseTest
     {
