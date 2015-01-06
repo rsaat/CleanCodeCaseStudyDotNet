@@ -17,7 +17,8 @@ namespace cleancoderscom.socketserver
         private bool running;
 
         private TcpListener serverSocket;
-
+        private ThreadCounter threadCounter;
+       
         public SocketServer(int port, SocketService service)
         {
             this.port = port;
@@ -25,6 +26,8 @@ namespace cleancoderscom.socketserver
             var ipAddress = Dns.GetHostEntry("localhost").AddressList[0];
             serverSocket = new TcpListener(ipAddress, port);
             serverSocket.Start();
+            threadCounter = new ThreadCounter();
+            
         }
 
         public virtual int Port
@@ -46,19 +49,31 @@ namespace cleancoderscom.socketserver
         public virtual void start()
         {
             running = true;
-
+            
             ThreadPool.QueueUserWorkItem(
                 (o) =>
                 {
+                    threadCounter.IncrementCount();
 
-                    try {
+                    try
+                    {
                         while (running)
                         {
                             var serviceSocket = serverSocket.AcceptTcpClient();
                             ThreadPool.QueueUserWorkItem(
                                 (o1) =>
                                 {
-                                    service.serve(serviceSocket);
+                                    threadCounter.IncrementCount();
+
+                                    try
+                                    {
+                                        service.serve(serviceSocket);
+                                    }
+                                    finally
+                                    {
+                                        threadCounter.DecrementCount();
+                                    }                                   
+                                    
                                 });
                         }
 
@@ -66,14 +81,17 @@ namespace cleancoderscom.socketserver
                     catch (Exception e)
                     {
                         if (running)
-                          Console.WriteLine(e.StackTrace);
+                            Console.WriteLine(e.StackTrace);
                     }
-                 }
-                 );
+                    finally
+                    {
+                        threadCounter.DecrementCount();
+                    }
+                }
+                );
             
         }
 
-       
         public virtual bool Running
         {
             get
@@ -85,10 +103,11 @@ namespace cleancoderscom.socketserver
         public virtual void stop()
         {
             running = false;
-            System.Threading.Thread.Sleep(250); //wait to finalize threads. 
             serverSocket.Stop();
-          
+            threadCounter.WaitAllToFinish();
         }
+
+     
     }
 
 }
