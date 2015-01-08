@@ -24,16 +24,10 @@ namespace cleancoderscom.tests.socketserver
 
     public class SocketServerTest
     {
-        private static ClosingSocketService service;
-        private static SocketServer server;
-        private static int port;
+        private ClosingSocketService service;
+        private SocketServer server;
+        private int port;
 
-        static SocketServerTest()
-        {
-            port = 8042;  
-        }
-
-        //This method is not called by NUnit if there is no tests.
         [SetUp]
         public virtual void setUp()
         {
@@ -95,62 +89,62 @@ namespace cleancoderscom.tests.socketserver
             }
         }
 
-        public class WithClosingSocketService
+        public class WithClosingSocketService : SocketServerTest
         {
 
             [SetUp]
             public virtual void setUp()
             {
-                SocketServerTest.service = new ClosingSocketService();
-                SocketServerTest.server = new SocketServer(SocketServerTest.port, SocketServerTest.service);
+                service = new ClosingSocketService();
+                server = new SocketServer(port, service);
             }
 
             [TearDown]
             public virtual void tearDown()
             {
-                SocketServerTest.server.stop();
+                server.stop();
             }
 
             [Test]
             public virtual void instantiate()
             {
-                Assert.AreEqual(SocketServerTest.port, SocketServerTest.server.Port);
-                Assert.AreEqual(service, SocketServerTest.server.Service);
+                Assert.AreEqual(port, server.Port);
+                Assert.AreEqual(service, server.Service);
             }
 
             [Test]
             public virtual void canStartAndStopServer()
             {
-                SocketServerTest.server.start();
-                Assert.IsTrue(SocketServerTest.server.Running);
-                SocketServerTest.server.stop();
-                Assert.IsFalse(SocketServerTest.server.Running);
+                server.start();
+                Assert.IsTrue(server.Running);
+                server.stop();
+                Assert.IsFalse(server.Running);
             }
 
             [Test]
             public virtual void acceptsAnIncomingConnection()
             {
-                SocketServerTest.server.start();
-                var temp = new TcpClient("localhost", SocketServerTest.port);
-                SocketServerTest.service.Wait();
-                SocketServerTest.server.stop();
+                server.start();
+                var temp = new TcpClient("localhost", port);
+                service.Wait();
+                server.stop();
 
-                Assert.AreEqual(1, SocketServerTest.service.connections);
+                Assert.AreEqual(1, service.connections);
             }
 
             [Test]
             public virtual void acceptsMultipleIncomingConnections()
             {
-                SocketServerTest.server.start();
-                var temp = new TcpClient("localhost", SocketServerTest.port);
-                SocketServerTest.service.Wait();
+                server.start();
+                var temp = new TcpClient("localhost", port);
+                service.Wait();
                 
-                temp = new TcpClient("localhost", SocketServerTest.port);
-                SocketServerTest.service.Wait();
+                temp = new TcpClient("localhost", port);
+                service.Wait();
 
-                SocketServerTest.server.stop();
+                server.stop();
 
-                Assert.AreEqual(2, SocketServerTest.service.connections);
+                Assert.AreEqual(2, service.connections);
             }
         } 
         #endregion
@@ -169,7 +163,7 @@ namespace cleancoderscom.tests.socketserver
             }
         }
 
-        public class WithReadingSocketService
+        public class WithReadingSocketService : SocketServerTest
         {
 
             internal ReadingSocketService readingService;
@@ -178,20 +172,20 @@ namespace cleancoderscom.tests.socketserver
             public virtual void setup()
             {
                 readingService = new ReadingSocketService();
-                SocketServerTest.server = new SocketServer(SocketServerTest.port, readingService);
+                server = new SocketServer(port, readingService);
             }
 
             [Test]
             public virtual void canSendAndReceiveData()
             {
-                SocketServerTest.server.start();
-                TcpClient s = new TcpClient("localhost", SocketServerTest.port);
+                server.start();
+                TcpClient s = new TcpClient("localhost", port);
                 System.IO.Stream os = s.GetStream();
                 var buffer = Encoding.UTF8.GetBytes("hello\n");
                 os.Write(buffer, 0, buffer.Length);
 
                 readingService.Wait();
-                SocketServerTest.server.stop();
+                server.stop();
 
                 Assert.AreEqual("hello", readingService.message);
             }
@@ -207,7 +201,7 @@ namespace cleancoderscom.tests.socketserver
             }
         }
 
-        public class WithEchoSocketService
+        public class WithEchoSocketService : SocketServerTest
         {
 
             internal ReadingSocketService readingService;
