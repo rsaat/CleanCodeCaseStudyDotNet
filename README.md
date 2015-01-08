@@ -151,7 +151,7 @@ There is a folder called NUnit-2.6.3 in the repository with the NUnit executable
 ### Episode 4
 - Visual Studio solution moved to the root folder of repository.
 - Test and Fixtures were moved to a separated assembly.
-- There is no hierarchical context test runner for NUnit, but the tests works with nested classes like Java version of tests. Nested classes in Java and C# have some differences see [C# nested classes are like C++ nested classes, not Java inner classes](http://blogs.msdn.com/b/oldnewthing/archive/2006/08/01/685248.aspx). The tests are not totally independent requiring that the parent test class run before nested class tests. 
+- There is no hierarchical context test runner for NUnit, but the tests works with nested classes like Java version of tests. Nested classes in Java and C# have some differences see [C# nested classes are like C++ nested classes, not Java inner classes](http://blogs.msdn.com/b/oldnewthing/archive/2006/08/01/685248.aspx). 
 -  Java ServerSocket replaced with .NET TcpListener.
 -  Java Socket replaced with .NET TcpClient
 -  Java Executors.newFixedThreadPool(4) replaced with .NET ThreadPool.QueueUserWorkItem. 
